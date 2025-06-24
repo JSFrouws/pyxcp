@@ -204,7 +204,11 @@ class Eth(BaseTransport):
 
     def send(self, frame) -> None:
         self.pre_send_timestamp = self.timestamp.value
-        self.sock.send(frame)
+        if self.use_tcp:
+            self.sock.send(frame)
+        else:
+            # UDP requires destination address
+            self.sock.sendto(frame, self.sockaddr)
         self.post_send_timestamp = self.timestamp.value
 
     def close_connection(self) -> None:

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 import struct
-from typing import Any, Callable
+from typing import Any, Callable, Tuple
 
 
 PackerType = Callable[[int], bytes]
-UnpackerType = Callable[[bytes], tuple[Any, ...]]
+UnpackerType = Callable[[bytes], Tuple[Any, ...]]
 
 
 def makeBytePacker(byteorder: str = "@") -> PackerType:
